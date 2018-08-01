@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|VisualGDB">
+      <Configuration>Debug</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|VisualGDB">
+      <Configuration>Release</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{3CB0BBBF-DFEA-46B7-B2EC-430C9EB3F74B}</ProjectGuid>
+    <BSP_ID>com.sysprogs.avr.core</BSP_ID>
+    <BSP_VERSION>1.0</BSP_VERSION>
+    <InPlaceBSPSubdir />
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <MCUPropertyListFile>$(ProjectDir)avr.props</MCUPropertyListFile>
+    <GenerateHexFile>true</GenerateHexFile>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <MCUPropertyListFile>$(ProjectDir)avr.props</MCUPropertyListFile>
+    <GenerateHexFile>true</GenerateHexFile>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <GNUConfigurationType>Debug</GNUConfigurationType>
+    <ToolchainID>com.visualgdb.avr</ToolchainID>
+    <ToolchainVersion>5.3.0/7.11/r1</ToolchainVersion>
+    <OutDir>$(SolutionDir)build\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
+    <VisualGDBSettingsFile>Debug.vgdbsettings</VisualGDBSettingsFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <ToolchainID>com.visualgdb.avr</ToolchainID>
+    <ToolchainVersion>5.3.0/7.11/r1</ToolchainVersion>
+    <OutDir>$(SolutionDir)build\</OutDir>
+    <IntDir>temp\$(Configuration)\</IntDir>
+    <VisualGDBSettingsFile>Release.vgdbsettings</VisualGDBSettingsFile>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <ToolchainSettingsContainer>
+      <DeviceType>atmega32a</DeviceType>
+    </ToolchainSettingsContainer>
+    <ClCompile>
+      <AdditionalIncludeDirectories>src;src\Arduino;src\EEPROM;src\TVout;src\TVout\fonts</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>F_CPU=16000000UL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>-funsigned-char -funsigned-bitfields -ffunction-sections -fpack-struct -fshort-enums -ffreestanding %(AdditionalOptions)</AdditionalOptions>
+      <Optimization>Os</Optimization>
+      <LinkTimeOptimization>true</LinkTimeOptimization>
+      <PrecompiledHeaderDirectory />
+      <CLanguageStandard>C11</CLanguageStandard>
+      <CPPLanguageStandard>CPP11</CPPLanguageStandard>
+    </ClCompile>
+    <Link>
+      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
+      <AdditionalOptions>-fwhole-program
+-fno-inline-small-functions -fno-split-wide-types -fno-tree-scev-cprop
+-Wl,--relax,--gc-sections %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <ToolchainSettingsContainer>
+      <DeviceType>atmega32a</DeviceType>
+    </ToolchainSettingsContainer>
+    <ClCompile>
+      <AdditionalIncludeDirectories>src;src\Arduino;src\EEPROM;src\TVout;src\TVout\fonts</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>F_CPU=16000000UL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Optimization>Os</Optimization>
+      <LinkTimeOptimization>true</LinkTimeOptimization>
+      <OmitFramePointer>
+      </OmitFramePointer>
+      <CPPLanguageStandard>CPP11</CPPLanguageStandard>
+      <CLanguageStandard>C11</CLanguageStandard>
+      <PrecompiledHeaderDirectory />
+      <AdditionalOptions>-funsigned-char -funsigned-bitfields -ffunction-sections -fpack-struct -fshort-enums -ffreestanding %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <AdditionalOptions>-fwhole-program
+-fno-inline-small-functions -fno-split-wide-types -fno-tree-scev-cprop
+-Wl,--relax,--gc-sections %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <None Include="Debug.vgdbsettings" />
+    <None Include="Release.vgdbsettings" />
+    <None Include="avr.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\arduino\abi.cpp" />
+    <ClCompile Include="src\arduino\CDC.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\HardwareSerial.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\HardwareSerial0.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\HardwareSerial1.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\HardwareSerial2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\HardwareSerial3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\hooks.c" />
+    <ClCompile Include="src\arduino\IPAddress.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\main.cpp" />
+    <ClCompile Include="src\arduino\new.cpp" />
+    <ClCompile Include="src\arduino\PluggableUSB.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\Print.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\Stream.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\Tone.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\USBCore.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\WInterrupts.c" />
+    <ClCompile Include="src\arduino\wiring.c" />
+    <ClCompile Include="src\arduino\wiring_analog.c" />
+    <ClCompile Include="src\arduino\wiring_digital.c" />
+    <ClCompile Include="src\arduino\wiring_pulse.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\wiring_pulse.S">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\wiring_shift.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\arduino\WMath.cpp" />
+    <ClCompile Include="src\arduino\WString.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\avr-rx5808.cpp" />
+    <ClCompile Include="src\TVout\fonts\font4x6.cpp" />
+    <ClCompile Include="src\TVout\fonts\font6x8.cpp" />
+    <ClCompile Include="src\TVout\fonts\font8x8.cpp" />
+    <ClCompile Include="src\TVout\fonts\font8x8ext.cpp" />
+    <ClCompile Include="src\screens.cpp" />
+    <ClInclude Include="src\arduino\Arduino.h" />
+    <ClInclude Include="src\arduino\binary.h" />
+    <ClInclude Include="src\arduino\Client.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\HardwareSerial.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\HardwareSerial_private.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\IPAddress.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\new.h" />
+    <ClInclude Include="src\arduino\pins_arduino.h" />
+    <ClInclude Include="src\arduino\PluggableUSB.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\Print.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\Printable.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\Server.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\Stream.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\Udp.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\USBAPI.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\USBCore.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\USBDesc.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\arduino\WCharacter.h" />
+    <ClInclude Include="src\arduino\wiring_private.h" />
+    <ClInclude Include="src\arduino\WString.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="src\EEPROM\EEPROM.h" />
+    <ClInclude Include="src\screens.h" />
+    <ClInclude Include="src\settings.h" />
+    <ClCompile Include="src\TVout\TVout.cpp" />
+    <ClCompile Include="src\TVout\print.cpp" />
+    <ClCompile Include="src\TVout\video_gen.cpp" />
+    <ClInclude Include="src\TVout\fonts\font4x6.h" />
+    <ClInclude Include="src\TVout\fonts\font6x8.h" />
+    <ClInclude Include="src\TVout\fonts\font8x8.h" />
+    <ClInclude Include="src\TVout\fonts\font8x8ext.h" />
+    <ClInclude Include="src\TVout\fonts\fontALL.h" />
+    <ClInclude Include="src\TVout\TVout.h" />
+    <ClInclude Include="src\TVout\video_gen.h" />
+    <ClInclude Include="src\TVout\spec\hardware_setup.h" />
+    <ClInclude Include="src\TVout\spec\video_properties.h" />
+    <None Include="avr.props" />
+  </ItemGroup>
+</Project>
