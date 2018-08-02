@@ -81,20 +81,20 @@
 #endif
 
 // this two are minimum required
-#define buttonUp						2
-#define buttonMode						3
+#define buttonUp						8
+#define buttonMode						9
 // optional comfort buttons
-#define buttonDown						4
-#define buttonSave						5
+#define buttonDown						10
+#define buttonSave						11
 // Buzzer
-#define buzzer							6
+#define buzzer							12
+// Led
+#define led								1
 
 // key debounce delay in ms
 // NOTE: good values are in the range of 100-200ms
 // shorter values will make it more reactive, but may lead to double trigger
 #define KEY_DEBOUNCE 200
-
-#define led			 13
 // number of analog rssi reads to average for the current check.
 #define RSSI_READS	 50
 // RSSI default raw range
