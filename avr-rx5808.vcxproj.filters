@@ -33,24 +33,6 @@
     <ClInclude Include="src\settings.h">
       <Filter>Sources</Filter>
     </ClInclude>
-    <ClCompile Include="src\TVout\TVout.cpp">
-      <Filter>Sources\TVout</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TVout\video_gen.cpp">
-      <Filter>Sources\TVout</Filter>
-    </ClCompile>
-    <ClInclude Include="src\TVout\TVout.h">
-      <Filter>Sources\TVout</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TVout\video_gen.h">
-      <Filter>Sources\TVout</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TVout\spec\hardware_setup.h">
-      <Filter>Sources\TVout\spec</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TVout\spec\video_properties.h">
-      <Filter>Sources\TVout\spec</Filter>
-    </ClInclude>
     <None Include="Debug.vgdbsettings" />
     <None Include="Release.vgdbsettings" />
     <None Include="avr.props">
@@ -121,20 +103,32 @@
     <ClInclude Include="src\EEPROM\EEPROM.h">
       <Filter>Sources\EEPROM</Filter>
     </ClInclude>
-    <ClInclude Include="src\TVout\fonts\font4x6.h">
+    <ClInclude Include="src\tvout\tvout.h">
+      <Filter>Sources\TVout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tvout\video_gen.h">
+      <Filter>Sources\TVout</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tvout\fonts\font4x6.h">
       <Filter>Sources\TVout\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="src\TVout\fonts\font6x8.h">
+    <ClInclude Include="src\tvout\fonts\font6x8.h">
       <Filter>Sources\TVout\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="src\TVout\fonts\font8x8.h">
+    <ClInclude Include="src\tvout\fonts\font8x8.h">
       <Filter>Sources\TVout\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="src\TVout\fonts\font8x8ext.h">
+    <ClInclude Include="src\tvout\fonts\font8x8ext.h">
       <Filter>Sources\TVout\fonts</Filter>
     </ClInclude>
-    <ClInclude Include="src\TVout\fonts\fontALL.h">
+    <ClInclude Include="src\tvout\fonts\fontALL.h">
       <Filter>Sources\TVout\fonts</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tvout\spec\hardware_setup.h">
+      <Filter>Sources\TVout\spec</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tvout\spec\video_properties.h">
+      <Filter>Sources\TVout\spec</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -213,26 +207,32 @@
     <ClCompile Include="src\arduino\WString.cpp">
       <Filter>Sources\Arduino</Filter>
     </ClCompile>
-    <ClCompile Include="src\TVout\fonts\font4x6.cpp">
-      <Filter>Sources\TVout\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TVout\fonts\font6x8.cpp">
-      <Filter>Sources\TVout\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TVout\fonts\font8x8.cpp">
-      <Filter>Sources\TVout\fonts</Filter>
-    </ClCompile>
-    <ClCompile Include="src\TVout\fonts\font8x8ext.cpp">
-      <Filter>Sources\TVout\fonts</Filter>
-    </ClCompile>
     <ClCompile Include="src\screens.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\TVout\print.cpp">
-      <Filter>Sources\TVout</Filter>
-    </ClCompile>
     <ClCompile Include="src\avr-rx5808.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\tvout.cpp">
+      <Filter>Sources\TVout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\tvprint.cpp">
+      <Filter>Sources\TVout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\video_gen.cpp">
+      <Filter>Sources\TVout</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\fonts\font4x6.cpp">
+      <Filter>Sources\TVout\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\fonts\font6x8.cpp">
+      <Filter>Sources\TVout\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\fonts\font8x8.cpp">
+      <Filter>Sources\TVout\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tvout\fonts\font8x8ext.cpp">
+      <Filter>Sources\TVout\fonts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
