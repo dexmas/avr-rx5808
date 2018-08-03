@@ -11,16 +11,16 @@ screens drawScreen;
 // Channels to sent to the SPI registers
 const uint16_t channelTable[] PROGMEM = 
 {
-  // Channel 1 - 8
-  0x2A05,    0x299B,    0x2991,    0x2987,    0x291D,    0x2913,    0x2909,    0x289F,    // Band A
-  0x2903,    0x290C,    0x2916,    0x291F,    0x2989,    0x2992,    0x299C,    0x2A05,    // Band B
-  0x2895,    0x288B,    0x2881,    0x2817,    0x2A0F,    0x2A19,    0x2A83,    0x2A8D,    // Band E
-  0x2906,    0x2910,    0x291A,    0x2984,    0x298E,    0x2998,    0x2A02,    0x2A0C,    // Band F / Airwave
+	// Channel 1 - 8
+	0x2A05,    0x299B,    0x2991,    0x2987,    0x291D,    0x2913,    0x2909,    0x289F,    // Band A
+	0x2903,    0x290C,    0x2916,    0x291F,    0x2989,    0x2992,    0x299C,    0x2A05,    // Band B
+	0x2895,    0x288B,    0x2881,    0x2817,    0x2A0F,    0x2A19,    0x2A83,    0x2A8D,    // Band E
+	0x2906,    0x2910,    0x291A,    0x2984,    0x298E,    0x2998,    0x2A02,    0x2A0C,    // Band F / Airwave
 #ifdef USE_LBAND
-  0x281D,    0x288F,    0x2902,    0x2914,    0x2987,    0x2999,    0x2A0C,    0x2A1E,    // Band C / Immersion Raceband
-  0x2609,    0x261C,    0x268E,    0x2701,    0x2713,    0x2786,    0x2798,    0x280B     // Band D / 5.3
+	0x281D,    0x288F,    0x2902,    0x2914,    0x2987,    0x2999,    0x2A0C,    0x2A1E,    // Band C / Immersion Raceband
+	0x2609,    0x261C,    0x268E,    0x2701,    0x2713,    0x2786,    0x2798,    0x280B     // Band D / 5.3
 #else
-  0x281D,    0x288F,    0x2902,    0x2914,    0x2987,    0x2999,    0x2A0C,    0x2A1E     // Band C / Immersion Raceband
+	0x281D,    0x288F,    0x2902,    0x2914,    0x2987,    0x2999,    0x2A0C,    0x2A1E     // Band C / Immersion Raceband
 #endif
 };
 
@@ -549,7 +549,7 @@ void setup()
     // SPI pins for RX control
     pinMode (slaveSelectPin, OUTPUT);
     pinMode (spiDataPin, OUTPUT);
-	pinMode (spiClockPin, OUTPUT);
+	  pinMode (spiClockPin, OUTPUT);
 
     // use values only of EEprom is not 255 = unsaved
     uint8_t eeprom_check = EEPROM.read(EEPROM_ADR_STATE);
@@ -643,13 +643,12 @@ void setup()
 	
     // Setup Done - Turn Status LED off.
     digitalWrite(led, LOW);
-
 }
 
 void loop()
 {
-    uint8_t in_menu;
-    uint8_t in_menu_time_out;
+	uint8_t in_menu;
+	uint8_t in_menu_time_out;
 
     if (digitalRead(buttonMode) == LOW) // key pressed ?
     {
@@ -901,11 +900,11 @@ void loop()
 				
             // selection by inverted box
             break;
-        } // end switch
+		} // end switch
 
-        last_state=state;
-    }
-	
+		last_state=state;
+	}
+
 #ifdef USE_VOLTAGE_MONITORING
     if(state == STATE_VOLTAGE) {
         // simple menu
@@ -1350,7 +1349,7 @@ void loop()
                 delay(150);// wait for button release
             }
             while(editing==-1 && (digitalRead(buttonMode) == LOW || digitalRead(buttonUp) == LOW || digitalRead(buttonDown) == LOW));
-        }
+		}
         while(in_menu);
     }
 	
@@ -1377,4 +1376,5 @@ void loop()
     read_voltage();
     voltage_alarm();
 #endif
+	
 }

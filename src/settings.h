@@ -82,7 +82,7 @@
 
 // this two are minimum required
 #define buttonUp						8
-#define buttonMode						9
+#define buttonMode						19
 // optional comfort buttons
 #define buttonDown						10
 #define buttonSave						11

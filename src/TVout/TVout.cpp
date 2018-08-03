@@ -128,7 +128,7 @@ char TVout::begin(uint8_t mode, uint8_t x, uint8_t y, uint8_t *framebuffer) {
 /* Stop video render and free the used memory.
  */
  void TVout::end() {
-	TIMSK1 = 0;
+	TIMSK = 0;
 	free(screen);
 }
 

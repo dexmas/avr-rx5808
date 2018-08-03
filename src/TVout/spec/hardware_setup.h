@@ -97,8 +97,6 @@
 #define DDR_SYNC	DDRD
 #define SYNC_PIN	5
 
-#define TIMSK1 TIMSK
-
 #endif
 
 //automatic BST/BLD/ANDI macro definition

@@ -131,7 +131,7 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 		TCCR1B = _BV(CS10);
 
 		// Enable input capture interrupt
-		TIMSK1 |= _BV(TICIE1);
+		TIMSK |= _BV(OCIE0);
 
 		// Enable external interrupt INT0 on pin 2 with falling edge.
 		GICR  |= _BV(INT0);
@@ -141,7 +141,7 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 		// inverted fast pwm mode on timer 1
 		TCCR1A = _BV(COM1A1) | _BV(COM1A0) | _BV(WGM11);
 		TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);
-		TIMSK1 = _BV(TOIE1);
+		TIMSK = _BV(TOIE1);
 	}
 
 	sei();
