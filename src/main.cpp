@@ -1339,14 +1339,15 @@ void update()
     {
         // simple menu
         char menu_id = 0;
+		int editing = -1;
+
         in_menu = 1;
-        drawScreen.setupMenu();
-        int editing = -1;
 	    
         do
 	    {
             in_menu_time_out = 80;
-            drawScreen.updateSetupMenu(menu_id, settings_beeps, settings_orderby_channel, call_sign, editing);
+
+            drawScreen.setupMenu(menu_id, settings_beeps, settings_orderby_channel, call_sign, editing);
             
 	        while(--in_menu_time_out && (bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE) && bit_is_set(PORT_BTN_UP, PIN_BTN_UP) && bit_is_set(PORT_BTN_DOWN, PIN_BTN_DOWN))) // wait for next key press or time out
             {

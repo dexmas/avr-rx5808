@@ -45,8 +45,7 @@ class screens
 #endif
 
         // SETUP MENU
-        void setupMenu();
-        void updateSetupMenu(uint8_t menu_id,bool settings_beeps,bool settings_orderby_channel, const char *call_sign, char editing);
+        void setupMenu(uint8_t menu_id,bool settings_beeps,bool settings_orderby_channel, const char *call_sign, char editing);
 
         // SAVE
         void save(uint8_t mode, uint8_t channelIndex, uint16_t channelFrequency, const char *call_sign);

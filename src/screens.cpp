@@ -55,9 +55,9 @@ void screens::reset()
 
 void screens::drawTitleBox(const char *title) 
 {
-    TV.draw_rect(0,0,127,95,  WHITE);
-    TV.printPGM(((127-strlen_P(title)*8)/2), 3,  title);
-    TV.draw_rect(0,0,127,14,  WHITE,INVERT);
+    TV.draw_rect(0, 0, 127, 95, WHITE);
+    TV.printPGM(((127 - strlen_P(title) * 8) / 2), 3,  title);
+    TV.draw_rect(0, 0, 127, 14,  WHITE, INVERT);
 }
 
 void screens::mainMenu(uint8_t menu_id) 
@@ -88,27 +88,24 @@ void screens::seekMode(uint8_t state)
     reset(); // start from fresh screen.
 	
     if (state == STATE_MANUAL)
-    {
         drawTitleBox(PSTR("MANUAL MODE"));
-    }
-    else if(state == STATE_SEEK)
-    {
+    else 
+	if(state == STATE_SEEK)
         drawTitleBox(PSTR("AUTO SEEK MODE"));
-    }
 	
-    TV.draw_line(0,1*TV_Y_GRID,TV_X_MAX,1*TV_Y_GRID,WHITE);
-    TV.printPGM(5,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("BAND: "));
-    TV.draw_line(0,2*TV_Y_GRID,TV_X_MAX,2*TV_Y_GRID,WHITE);
-    TV.printPGM(5 ,TV_Y_OFFSET-1+2*TV_Y_GRID,  PSTR("1 2 3 4 5 6 7 8"));
-    TV.draw_line(0,3*TV_Y_GRID,TV_X_MAX,3*TV_Y_GRID,WHITE);
-    TV.printPGM(5,TV_Y_OFFSET+3*TV_Y_GRID,  PSTR("FREQ:     GHz"));
-    TV.draw_line(0,4*TV_Y_GRID,TV_X_MAX,4*TV_Y_GRID,WHITE);
+    TV.draw_line(0, 1*TV_Y_GRID, TV_X_MAX, 1*TV_Y_GRID, WHITE);
+    TV.printPGM(5, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("BAND: "));
+    TV.draw_line(0, 2*TV_Y_GRID, TV_X_MAX, 2*TV_Y_GRID, WHITE);
+    TV.printPGM(5, TV_Y_OFFSET-1+2*TV_Y_GRID, PSTR("1 2 3 4 5 6 7 8"));
+    TV.draw_line(0, 3*TV_Y_GRID, TV_X_MAX, 3*TV_Y_GRID, WHITE);
+    TV.printPGM(5, TV_Y_OFFSET+3*TV_Y_GRID, PSTR("FREQ:     GHz"));
+    TV.draw_line(0, 4*TV_Y_GRID, TV_X_MAX, 4*TV_Y_GRID, WHITE);
     TV.select_font(font4x6);
-    TV.printPGM(5,TV_Y_OFFSET+4*TV_Y_GRID,  PSTR("RSSI:"));
-    TV.draw_line(0,5*TV_Y_GRID-4,TV_X_MAX,5*TV_Y_GRID-4,WHITE);
+    TV.printPGM(5, TV_Y_OFFSET+4*TV_Y_GRID, PSTR("RSSI:"));
+    TV.draw_line(0, 5*TV_Y_GRID-4, TV_X_MAX, 5*TV_Y_GRID-4, WHITE);
 	
     // frame for tune graph
-    TV.draw_rect(0,TV_ROWS - TV_SCANNER_OFFSET,TV_X_MAX,13,  WHITE); // lower frame
+    TV.draw_rect(0, TV_ROWS - TV_SCANNER_OFFSET, TV_X_MAX, 13, WHITE); // lower frame
 #ifdef USE_LBAND
     TV.print(2, (TV_ROWS - TV_SCANNER_OFFSET + 2), "5362");
 #else
@@ -117,72 +114,72 @@ void screens::seekMode(uint8_t state)
 	
     TV.print(57, (TV_ROWS - TV_SCANNER_OFFSET + 2), "5800");
     TV.print(111, (TV_ROWS - TV_SCANNER_OFFSET + 2), "5945");
-
 }
 
 void screens::updateSeekMode(uint8_t state, uint8_t channelIndex, uint8_t channel, uint8_t rssi, uint16_t channelFrequency, uint8_t rssi_seek_threshold, bool locked) 
 {
     // display refresh handler
     TV.select_font(font8x8);
+
     if(channelIndex != last_channel) // only updated on changes
     {
         // show current used channel of bank
 #ifdef USE_LBAND
         if(channelIndex > 39)
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("D/5.3    "));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("D/5.3    "));
         }
         else if(channelIndex > 31)
 #else
         if(channelIndex > 31)
 #endif
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("C/Race   "));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("C/Race   "));
         }
         else if(channelIndex > 23)
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("F/Airwave"));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("F/Airwave"));
         }
         else if (channelIndex > 15)
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("E        "));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("E        "));
         }
         else if (channelIndex > 7)
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("B        "));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("B        "));
         }
         else
         {
-            TV.printPGM(50,TV_Y_OFFSET+1*TV_Y_GRID,  PSTR("A        "));
+            TV.printPGM(50, TV_Y_OFFSET+1*TV_Y_GRID, PSTR("A        "));
         }
 	    
         // show channel inside band
-        uint8_t active_channel = channelIndex%CHANNEL_BAND_SIZE; // get channel inside band
+        uint8_t active_channel = channelIndex % CHANNEL_BAND_SIZE; // get channel inside band
 
-        TV.draw_rect(1 ,TV_Y_OFFSET-2+2*TV_Y_GRID,125,12,  BLACK, BLACK); // mark current channel
-        TV.printPGM(5 ,TV_Y_OFFSET-1+2*TV_Y_GRID,  PSTR("1 2 3 4 5 6 7 8"));
+        TV.draw_rect(1, TV_Y_OFFSET-2+2*TV_Y_GRID, 125, 12, BLACK, BLACK); // mark current channel
+        TV.printPGM(5, TV_Y_OFFSET-1+2*TV_Y_GRID, PSTR("1 2 3 4 5 6 7 8"));
         // set new marker
-        TV.draw_rect(active_channel*16+2 ,TV_Y_OFFSET-2+2*TV_Y_GRID,12,12,  WHITE, INVERT); // mark current channel
+        TV.draw_rect(active_channel*16+2, TV_Y_OFFSET-2+2*TV_Y_GRID, 12, 12, WHITE, INVERT); // mark current channel
 
         // clear last square
-        TV.draw_rect(1, (TV_ROWS - TV_SCANNER_OFFSET + 8),125,SCANNER_MARKER_SIZE,  BLACK, BLACK);
+        TV.draw_rect(1, (TV_ROWS - TV_SCANNER_OFFSET + 8), 125, SCANNER_MARKER_SIZE, BLACK, BLACK);
         // draw next
 #ifdef USE_LBAND
-        TV.draw_rect((channel * 5/2)+5, (TV_ROWS - TV_SCANNER_OFFSET + 8),SCANNER_MARKER_SIZE,SCANNER_MARKER_SIZE,  WHITE, WHITE);
+        TV.draw_rect((channel * 5/2)+5, (TV_ROWS - TV_SCANNER_OFFSET + 8), SCANNER_MARKER_SIZE, SCANNER_MARKER_SIZE, WHITE, WHITE);
 
 #else
-        TV.draw_rect((channel * 3)+5, (TV_ROWS - TV_SCANNER_OFFSET + 8),SCANNER_MARKER_SIZE,SCANNER_MARKER_SIZE,  WHITE, WHITE);
+        TV.draw_rect((channel * 3)+5, (TV_ROWS - TV_SCANNER_OFFSET + 8), SCANNER_MARKER_SIZE, SCANNER_MARKER_SIZE, WHITE, WHITE);
 
 #endif
         // show frequence
-        TV.print(50,TV_Y_OFFSET+3*TV_Y_GRID, (int)channelFrequency);
+        TV.print(50, TV_Y_OFFSET+3*TV_Y_GRID, (int)channelFrequency);
     }
     // show signal strength
     uint8_t rssi_scaled = map(rssi, 1, 100, 1, 100);
     // clear last bar
-    TV.draw_rect(25, TV_Y_OFFSET+4*TV_Y_GRID, 100, 4 , BLACK, BLACK);
+    TV.draw_rect(25, TV_Y_OFFSET+4*TV_Y_GRID, 100, 4, BLACK, BLACK);
     //  draw new bar
-    TV.draw_rect(25, TV_Y_OFFSET+4*TV_Y_GRID, rssi_scaled, 4 , WHITE, WHITE);
+    TV.draw_rect(25, TV_Y_OFFSET+4*TV_Y_GRID, rssi_scaled, 4, WHITE, WHITE);
     // print bar for spectrum
 
     #define SCANNER_BAR_MINI_SIZE 14
@@ -191,14 +188,14 @@ void screens::updateSeekMode(uint8_t state, uint8_t channelIndex, uint8_t channe
 
 #ifdef USE_LBAND
     // clear last bar
-    TV.draw_rect((channel * 5/2)+4, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 2, SCANNER_BAR_MINI_SIZE , BLACK, BLACK);
+    TV.draw_rect((channel * 5/2)+4, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 2, SCANNER_BAR_MINI_SIZE, BLACK, BLACK);
     //  draw new bar
-    TV.draw_rect((channel * 5/2)+4, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), 2, rssi_scaled , WHITE, WHITE);
+    TV.draw_rect((channel * 5/2)+4, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), 2, rssi_scaled, WHITE, WHITE);
 #else
    // clear last bar
-    TV.draw_rect((channel * 3)+4, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 2, SCANNER_BAR_MINI_SIZE , BLACK, BLACK);
+    TV.draw_rect((channel * 3)+4, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 2, SCANNER_BAR_MINI_SIZE, BLACK, BLACK);
     //  draw new bar
-    TV.draw_rect((channel * 3)+4, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), 2, rssi_scaled , WHITE, WHITE);
+    TV.draw_rect((channel * 3)+4, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), 2, rssi_scaled, WHITE, WHITE);
 #endif
     // handling for seek mode after screen and RSSI has been fully processed
     if(state == STATE_SEEK)
@@ -206,26 +203,26 @@ void screens::updateSeekMode(uint8_t state, uint8_t channelIndex, uint8_t channe
 
         rssi_scaled=map(rssi_seek_threshold, 1, 100, 1, SCANNER_BAR_MINI_SIZE);
 
-        TV.draw_rect(1,(TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE),2,SCANNER_BAR_MINI_SIZE-1,BLACK,BLACK);
-        TV.draw_line(1,(TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled),3,(TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), WHITE);
-        TV.draw_rect(TV_X_MAX-2,(TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE),1,SCANNER_BAR_MINI_SIZE-1,BLACK,BLACK);
-        TV.draw_line(TV_X_MAX-2,(TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled),TV_X_MAX,(TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), WHITE);
+        TV.draw_rect(1, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 2, SCANNER_BAR_MINI_SIZE-1, BLACK, BLACK);
+        TV.draw_line(1, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), 3,(TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), WHITE);
+        TV.draw_rect(TV_X_MAX-2, (TV_ROWS - TV_SCANNER_OFFSET - SCANNER_BAR_MINI_SIZE), 1,SCANNER_BAR_MINI_SIZE-1, BLACK, BLACK);
+        TV.draw_line(TV_X_MAX-2, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), TV_X_MAX, (TV_ROWS - TV_SCANNER_OFFSET - rssi_scaled), WHITE);
         
 	    if(last_channel != channelIndex) 
         {
             // fix title flicker
-            TV.draw_rect(0,0,127,14, WHITE,BLACK);
+            TV.draw_rect(0, 0, 127, 14, WHITE, BLACK);
             
 	        if(locked) 
             {
-                TV.printPGM(((127-14*8)/2), TV_Y_OFFSET,  PSTR("AUTO MODE LOCK"));
+                TV.printPGM(((127 - 14 * 8) / 2), TV_Y_OFFSET, PSTR("AUTO MODE LOCK"));
             }
             else
             {
-                TV.printPGM(((127-14*8)/2), TV_Y_OFFSET,  PSTR("AUTO MODE SEEK"));
+                TV.printPGM(((127 - 14 * 8) / 2), TV_Y_OFFSET, PSTR("AUTO MODE SEEK"));
             }
 	        
-            TV.draw_rect(0,0,127,14,  WHITE,INVERT);
+            TV.draw_rect(0, 0, 127, 14, WHITE,INVERT);
         }
     }
 
@@ -237,7 +234,7 @@ void screens::bandScanMode(uint8_t state)
     reset(); // start from fresh screen.
     best_rssi = 0;
 	
-    if(state==STATE_SCAN)
+    if(state == STATE_SCAN)
     {
         drawTitleBox(PSTR("BAND SCANNER"));
     }
@@ -248,10 +245,10 @@ void screens::bandScanMode(uint8_t state)
 	
     TV.select_font(font8x8);
 	
-    if(state==STATE_SCAN)
+    if(state == STATE_SCAN)
     {
         TV.select_font(font4x6);
-        TV.draw_line(50,1*TV_Y_GRID,50, 1*TV_Y_GRID+9,WHITE);
+        TV.draw_line(50, 1*TV_Y_GRID, 50, 1*TV_Y_GRID+9, WHITE);
         TV.printPGM(2, SCANNER_LIST_Y_POS, PSTR("BEST:"));
     }
     else
@@ -260,8 +257,8 @@ void screens::bandScanMode(uint8_t state)
         TV.printPGM(10, SCANNER_LIST_Y_POS, PSTR("RSSI Min:     RSSI Max:   "));
     }
 	
-    TV.draw_rect(0,1*TV_Y_GRID,TV_X_MAX,9,  WHITE); // list frame
-    TV.draw_rect(0,TV_ROWS - TV_SCANNER_OFFSET,TV_X_MAX,13,  WHITE); // lower frame
+    TV.draw_rect(0, 1*TV_Y_GRID, TV_X_MAX, 9, WHITE); // list frame
+    TV.draw_rect(0, TV_ROWS - TV_SCANNER_OFFSET, TV_X_MAX, 13, WHITE); // lower frame
     TV.select_font(font4x6);
 	
 #ifdef USE_LBAND
@@ -407,11 +404,7 @@ void screens::updateVoltage(int voltage)
 
 #endif
 
-void screens::setupMenu()
-{
-}
-
-void screens::updateSetupMenu(uint8_t menu_id,bool settings_beeps,bool settings_orderby_channel, const char *call_sign, char editing)
+void screens::setupMenu(uint8_t menu_id,bool settings_beeps,bool settings_orderby_channel, const char *call_sign, char editing)
 {
     reset();
 	
