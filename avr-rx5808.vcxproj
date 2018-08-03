@@ -101,87 +101,9 @@
     <None Include="avr.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\arduino\abi.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\CDC.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial0.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial1.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial2.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial3.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\hooks.c" />
-    <ClCompile Include="src\arduino\IPAddress.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\main.cpp" />
-    <ClCompile Include="src\arduino\new.cpp" />
-    <ClCompile Include="src\arduino\PluggableUSB.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Print.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Stream.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Tone.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\USBCore.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\WInterrupts.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring.c" />
-    <ClCompile Include="src\arduino\wiring_analog.c" />
-    <ClCompile Include="src\arduino\wiring_digital.c" />
-    <ClCompile Include="src\arduino\wiring_pulse.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_pulse.S">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_shift.c">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\arduino\WMath.cpp" />
-    <ClCompile Include="src\arduino\WString.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="src\avr-rx5808.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\screens.cpp" />
+    <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\tvout\fonts\font4x6.cpp" />
     <ClCompile Include="src\tvout\fonts\font6x8.cpp" />
     <ClCompile Include="src\tvout\fonts\font8x8.cpp" />
@@ -189,74 +111,6 @@
     <ClCompile Include="src\tvout\tvout.cpp" />
     <ClCompile Include="src\tvout\tvprint.cpp" />
     <ClCompile Include="src\tvout\video_gen.cpp" />
-    <ClInclude Include="src\arduino\Arduino.h" />
-    <ClInclude Include="src\arduino\binary.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Client.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\HardwareSerial.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\HardwareSerial_private.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\IPAddress.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\new.h" />
-    <ClInclude Include="src\arduino\pins_arduino.h" />
-    <ClInclude Include="src\arduino\PluggableUSB.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Print.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Printable.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Server.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Stream.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Udp.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBAPI.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBCore.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBDesc.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\WCharacter.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="src\arduino\wiring_private.h" />
-    <ClInclude Include="src\arduino\WString.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">true</ExcludedFromBuild>
-    </ClInclude>
     <ClInclude Include="src\EEPROM\EEPROM.h" />
     <ClInclude Include="src\screens.h" />
     <ClInclude Include="src\settings.h" />
@@ -269,6 +123,7 @@
     <ClInclude Include="src\tvout\spec\video_properties.h" />
     <ClInclude Include="src\tvout\tvout.h" />
     <ClInclude Include="src\tvout\video_gen.h" />
+    <ClInclude Include="src\utils.h" />
     <None Include="avr.props" />
   </ItemGroup>
 </Project>

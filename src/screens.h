@@ -50,5 +50,4 @@ class screens
 
         // SAVE
         void save(uint8_t mode, uint8_t channelIndex, uint16_t channelFrequency, const char *call_sign);
-        void updateSave(const char *msg);
 };

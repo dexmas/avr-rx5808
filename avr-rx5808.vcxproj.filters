@@ -19,9 +19,6 @@
     <Filter Include="Sources\TVout\fonts">
       <UniqueIdentifier>{fe6d3f88-87da-4c33-ae52-5de844ff674e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Arduino">
-      <UniqueIdentifier>{92188972-84d8-4cb7-8b05-af32197d2acd}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="avr.xml">
@@ -40,66 +37,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\arduino\Arduino.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\binary.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Client.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\HardwareSerial.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\HardwareSerial_private.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\IPAddress.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\new.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\pins_arduino.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\PluggableUSB.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Print.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Printable.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Server.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Stream.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\Udp.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBAPI.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBCore.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\USBDesc.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\WCharacter.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\wiring_private.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
-    <ClInclude Include="src\arduino\WString.h">
-      <Filter>Sources\Arduino</Filter>
-    </ClInclude>
     <ClInclude Include="src\EEPROM\EEPROM.h">
       <Filter>Sources\EEPROM</Filter>
     </ClInclude>
@@ -130,87 +67,12 @@
     <ClInclude Include="src\tvout\spec\video_properties.h">
       <Filter>Sources\TVout\spec</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils.h">
+      <Filter>Sources</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\arduino\abi.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\CDC.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial0.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial1.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial2.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\HardwareSerial3.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\hooks.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\IPAddress.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\main.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\new.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\PluggableUSB.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Print.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Stream.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\Tone.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\USBCore.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\WInterrupts.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_analog.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_digital.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_pulse.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_pulse.S">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\wiring_shift.c">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\WMath.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
-    <ClCompile Include="src\arduino\WString.cpp">
-      <Filter>Sources\Arduino</Filter>
-    </ClCompile>
     <ClCompile Include="src\screens.cpp">
-      <Filter>Sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\avr-rx5808.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="src\tvout\tvout.cpp">
@@ -233,6 +95,12 @@
     </ClCompile>
     <ClCompile Include="src\tvout\fonts\font8x8ext.cpp">
       <Filter>Sources\TVout\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

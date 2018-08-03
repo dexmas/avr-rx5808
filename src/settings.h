@@ -23,20 +23,29 @@
 // used for tuning time
 #define rx5808
 
-#define spiDataPin		10
-#define slaveSelectPin	11
-#define spiClockPin		12
+#define PIN_SPI_CLOCK	0
+#define PIN_SPI_DATA	1
+#define PIN_SPI_SELECT	2
+#define PORT_SPI		PORTC
+#define DDR_SPI			DDRC
+
 
 // Receiver PINS
-#define receiverA_led	A0
-#define rssiPinA		A6
+
+#define PIN_RXA_RSSI	0
+#define PIN_RXA_LED		1
+#define PORT_RXA		PORTA
+#define DDR_RXA			DDRA
 
 #define useReceiverA	1
 
 #ifdef USE_DIVERSITY
     // Diversity
-    #define receiverB_led A1
-    #define rssiPinB A7
+	#define PIN_RXB_RSSI	2
+	#define PIN_RXB_LED		3
+	#define PORT_RXB		PORTA
+	#define DDR_RXB			DDRA
+
     #define useReceiverAuto 0
     #define useReceiverB 2
     // rssi strenth should be 2% greater than other receiver before switch.
@@ -63,7 +72,9 @@
     //                     |    |
     //           R2 = 3.3k |    |
     //    BAT- ----====----|----|
-    #define VBAT_PIN			A4
+    #define PIN_ADC_VBAT		4
+	#define PORT_ADC_VBAT		PORTA
+	#define DDR_ADC_VBAT		DDRA
 
     // these are default values
     #define WARNING_VOLTAGE		108 // 3.6V per cell for 3S
@@ -80,16 +91,30 @@
     #define WARNING_BEEPS				2
 #endif
 
-// this two are minimum required
-#define buttonUp						8
-#define buttonMode						19
-// optional comfort buttons
-#define buttonDown						10
-#define buttonSave						11
+// Button "Up"
+#define PIN_BTN_UP						1
+#define PORT_BTN_UP						PORTB
+#define DDR_BTN_UP						DDRB
+// Button "Mode"
+#define PIN_BTN_MODE					2
+#define PORT_BTN_MODE					PORTB
+#define DDR_BTN_MODE					DDRB
+// Button "Down"
+#define PIN_BTN_DOWN					3
+#define PORT_BTN_DOWN					PORTB
+#define DDR_BTN_DOWN					DDRB
+// Button "Save"
+#define PIN_BTN_SAVE					4
+#define PORT_BTN_SAVE					PORTB
+#define DDR_BTN_SAVE					DDRB
 // Buzzer
-#define buzzer							12
+#define PIN_BUZZER						4
+#define PORT_BUZZER						PORTC
+#define DDR_BUZZER						DDRC
 // Led
-#define led								1
+#define PIN_LED							1
+#define PORT_LED						PORTD
+#define DDR_LED							DDRD
 
 // key debounce delay in ms
 // NOTE: good values are in the range of 100-200ms

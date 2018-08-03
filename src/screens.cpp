@@ -1,11 +1,10 @@
 
-#include <Arduino.h>
-
 #include <TVout.h>
 #include <fontALL.h>
 
 #include "settings.h"
 #include "screens.h"
+#include "utils.h"
 
 // Set you TV format (PAL = Europe = 50Hz, NTSC = INT = 60Hz)
 //#define TV_FORMAT NTSC
@@ -179,7 +178,7 @@ void screens::updateSeekMode(uint8_t state, uint8_t channelIndex, uint8_t channe
         TV.print(50,TV_Y_OFFSET+3*TV_Y_GRID, (int)channelFrequency);
     }
     // show signal strength
-    uint8_t rssi_scaled=map(rssi, 1, 100, 1, 100);
+    uint8_t rssi_scaled = map(rssi, 1, 100, 1, 100);
     // clear last bar
     TV.draw_rect(25, TV_Y_OFFSET+4*TV_Y_GRID, 100, 4 , BLACK, BLACK);
     //  draw new bar
@@ -524,10 +523,4 @@ void screens::save(uint8_t mode, uint8_t channelIndex, uint16_t channelFrequency
     TV.printPGM(10, 5+4*MENU_Y_SIZE, PSTR("FREQ:     GHz"));
     TV.print(50,5+4*MENU_Y_SIZE, (int)channelFrequency);
     TV.printPGM(10, 5+5*MENU_Y_SIZE, PSTR("--- SAVED ---"));
-}
-
-void screens::updateSave(const char * msg) 
-{
-    TV.select_font(font4x6);
-    TV.print(((127-strlen(msg)*4)/2), 14+5*MENU_Y_SIZE, msg);
 }
