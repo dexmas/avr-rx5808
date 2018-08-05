@@ -108,10 +108,12 @@ char TVout::begin(uint8_t mode, uint8_t x, uint8_t y) {
  *		0 if no error.
  *		1 if x is not divisable by 8.
  */
-char TVout::begin(uint8_t mode, uint8_t x, uint8_t y, uint8_t *framebuffer) {
+char TVout::begin(uint8_t mode, uint8_t x, uint8_t y, uint8_t *framebuffer) 
+{
 	// check if x is divisable by 8
-	if ( !(x & 0xF8))
+	if( !(x & 0xF8))
 		return 1;
+
 	x = x/8;
 
 	screen = framebuffer;
@@ -119,15 +121,16 @@ char TVout::begin(uint8_t mode, uint8_t x, uint8_t y, uint8_t *framebuffer) {
 	cursor_x = 0;
 	cursor_y = 0;
 
-	render_setup(mode,x,y,screen);
+	render_setup(mode, x, y, screen);
 	clear_screen();
 	return 0;
-} // end of begin
+}
 
 
 /* Stop video render and free the used memory.
  */
- void TVout::end() {
+ void TVout::end() 
+ {
 	TIMSK = 0;
 	free(screen);
 }

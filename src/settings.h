@@ -91,24 +91,18 @@
     #define WARNING_BEEPS				2
 #endif
 
-// Button "Up"
-#define PIN_BTN_UP						1
-#define PORT_BTN_UP						PORTB
-#define DDR_BTN_UP						DDRB
-// Button "Mode"
-#define PIN_BTN_MODE					2
-#define PORT_BTN_MODE					PORTB
-#define DDR_BTN_MODE					DDRB
-// Button "Down"
-#define PIN_BTN_DOWN					3
-#define PORT_BTN_DOWN					PORTB
-#define DDR_BTN_DOWN					DDRB
-// Button "Save"
-#define PIN_BTN_SAVE					4
-#define PORT_BTN_SAVE					PORTB
-#define DDR_BTN_SAVE					DDRB
+// Buttons
+#define PIN_BTN_UP						4
+#define PIN_BTN_DOWN					5
+#define PIN_BTN_MODE					6
+#define PIN_BTN_SAVE					7
+
+#define PORT_BTN						PORTC
+#define DDR_BTN							DDRC
+#define PIN_BTN							PINC
+
 // Buzzer
-#define PIN_BUZZER						4
+#define PIN_BUZZER						3
 #define PORT_BUZZER						PORTC
 #define DDR_BUZZER						DDRC
 // Led
@@ -147,7 +141,8 @@
 // Seconds to wait before force entering screensaver
 #define SCREENSAVER_TIMEOUT 30
 
-#define START_STATE STATE_SETUP_MENU
+#define START_STATE STATE_SEEK
+
 #define MAX_STATE STATE_MANUAL
 #ifdef USE_VOLTAGE_MONITORING
     #define SETUP_MENU_MAX_ITEMS 5

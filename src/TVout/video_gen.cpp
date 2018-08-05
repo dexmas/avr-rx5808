@@ -66,13 +66,13 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 	//as of 9/16/10 rendermode 3 will not work for resolutions lower than
 	//192(display.hres lower than 24)
 	unsigned char rmethod;
-	if (mode == PAL) {
+	if (mode == PAL)
 		rmethod = (_PAL_TIME_RENDERING_LINE * _CYCLES_PER_US) / (display.hres * 8); // re: 46 µs * 16 / (16 * 8) = 5.75 ticks per pixel
-	}
-	else {
+	else
 		rmethod = (_NTSC_TIME_RENDERING_LINE * _CYCLES_PER_US) / (display.hres * 8); // re: 46 µs * 16 / (16 * 8) = 5.75 ticks per pixel
-	}
-	switch(rmethod) {
+	
+	switch(rmethod) 
+	{
 		case 6:
 			render_line = &render_line6c;
 			break;
@@ -91,12 +91,14 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 			else
 				render_line = &render_line3c;
 	}
+
 	DDR_VID |= _BV(VID_PIN);
 	DDR_SYNC |= _BV(SYNC_PIN);
 	PORT_VID &= ~_BV(VID_PIN);
 	PORT_SYNC |= _BV(SYNC_PIN);
 
-	if (mode & PAL) {
+	if (mode & PAL) 
+	{
 		display.output_delay = _PAL_CYCLES_OUTPUT_START;
 		display.lines_frame = _PAL_LINE_FRAME;
 
@@ -108,7 +110,8 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 		ICR1  = _PAL_CYCLES_VSYNC_SCANLINE;
 		OCR1A = _PAL_CYCLES_VSYNC_EQUALIZING_PULSE;
 	}
-	else { // NTSC
+	else // NTSC
+	{ 
 		display.output_delay = _NTSC_CYCLES_OUTPUT_START;
 		display.lines_frame = _NTSC_LINE_FRAME;
 
@@ -124,7 +127,8 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 	display.vsyncScanLine = 0;
 	display.scanLine = 0;
 
-	if (mode & OVERLAY) {
+	if (mode & OVERLAY) 
+	{
 		line_handler = &empty;
 		// Enable timer1.  ICES0 is set to 0 for falling edge detection on input capture pin.
 		TCCR1A = 0;
@@ -136,12 +140,14 @@ void render_setup(uint8_t mode, uint8_t x, uint8_t y, uint8_t *scrnptr)
 		// Enable external interrupt INT0 on pin 2 with falling edge.
 		GICR  |= _BV(INT0);
 		MCUCR |= (1 << ISC01) | (0 << ISC00);
-	} else {
+	} 
+	else 
+	{
 		line_handler = &first_frame_vsync_lines;
 		// inverted fast pwm mode on timer 1
 		TCCR1A = _BV(COM1A1) | _BV(COM1A0) | _BV(WGM11);
 		TCCR1B = _BV(WGM13) | _BV(WGM12) | _BV(CS10);
-		TIMSK = _BV(TOIE1);
+		TIMSK |= _BV(TOIE1);
 	}
 
 	sei();

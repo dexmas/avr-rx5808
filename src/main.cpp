@@ -541,6 +541,8 @@ void update();
 void main()
 {
     // IO INIT
+	init_timer();
+
     // initialize digital
     sbi(DDR_LED, PIN_LED); // status pin for TV mode errors
 	sbi(PORT_LED, PIN_LED);
@@ -548,15 +550,25 @@ void main()
 	sbi(DDR_BUZZER, PIN_BUZZER); // Feedback buzzer
 	sbi(PORT_BUZZER, PIN_BUZZER);
     // minimum control pins
-	cbi(DDR_BTN_UP, PIN_BTN_UP);
-	sbi(PORT_BTN_UP, PIN_BTN_UP);
-	cbi(DDR_BTN_MODE, PIN_BTN_MODE);
-	sbi(PORT_BTN_MODE, PIN_BTN_MODE);
+	cbi(DDR_BTN, PIN_BTN_UP);
+	sbi(PORT_BTN, PIN_BTN_UP);
+	cbi(DDR_BTN, PIN_BTN_MODE);
+	sbi(PORT_BTN, PIN_BTN_MODE);
     // optional control
-	cbi(DDR_BTN_DOWN, PIN_BTN_DOWN);
-	sbi(PORT_BTN_DOWN, PIN_BTN_DOWN);
-	cbi(DDR_BTN_SAVE, PIN_BTN_SAVE);
-	sbi(PORT_BTN_SAVE, PIN_BTN_SAVE);
+	cbi(DDR_BTN, PIN_BTN_DOWN);
+	sbi(PORT_BTN, PIN_BTN_DOWN);
+	cbi(DDR_BTN, PIN_BTN_SAVE);
+	sbi(PORT_BTN, PIN_BTN_SAVE);
+
+	// ADC setup
+	// set a2d prescaler so we are inside the desired 50-200 KHz range.
+	sbi(ADCSRA, ADPS2);
+	sbi(ADCSRA, ADPS1);
+	sbi(ADCSRA, ADPS0);
+
+	// Enable ADC
+	sbi(ADCSRA, ADEN);
+
     //Receiver Setup
 	sbi(DDR_RXA, PIN_RXA_LED);
 #ifdef USE_DIVERSITY
@@ -688,7 +700,7 @@ void update()
 	uint8_t in_menu;
 	uint8_t in_menu_time_out;
 
-    if(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE)) // key pressed ?
+    if(bit_is_clear(PIN_BTN, PIN_BTN_MODE)) // key pressed ?
     {
 #ifdef USE_VOLTAGE_MONITORING
         clear_alarm();
@@ -702,7 +714,7 @@ void update()
         uint8_t press_time=0;
 
         // on entry wait for release
-        while(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE) && press_time < 10)
+        while(bit_is_clear(PIN_BTN, PIN_BTN_MODE) && press_time < 10)
         {
             delay(100);
             press_time++;
@@ -773,21 +785,21 @@ void update()
             // draw mode select screen
             drawScreen.mainMenu(menu_id);
 
-            while(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE) || bit_is_clear(PORT_BTN_UP, PIN_BTN_UP) || bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN))
+            while(bit_is_clear(PIN_BTN, PIN_BTN_MODE) || bit_is_clear(PIN_BTN, PIN_BTN_UP) || bit_is_clear(PIN_BTN, PIN_BTN_DOWN))
             {
                 // wait for MODE release
                 in_menu_time_out=50;
             }
 
-            while(--in_menu_time_out && (bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE) && bit_is_set(PORT_BTN_UP, PIN_BTN_UP) && bit_is_set(PORT_BTN_DOWN, PIN_BTN_DOWN)))
+            while(--in_menu_time_out && (bit_is_set(PIN_BTN, PIN_BTN_MODE) && bit_is_set(PIN_BTN, PIN_BTN_UP) && bit_is_set(PIN_BTN, PIN_BTN_DOWN)))
             {
 				// wait for next key press or time out
                 delay(100);
             }
 
-            if(in_menu_time_out==0 || bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE))
+            if(in_menu_time_out==0 || bit_is_clear(PIN_BTN, PIN_BTN_MODE))
             {
-                if(bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE))
+                if(bit_is_set(PIN_BTN, PIN_BTN_MODE))
 				{
                     state=state_last_used; // exit to last state on timeout.
                 }
@@ -801,7 +813,7 @@ void update()
             else // no timeout, must be keypressed
             {
                 // Menu handler
-                if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP))
+                if(bit_is_clear(PIN_BTN, PIN_BTN_UP))
 				{
                     menu_id--;
 
@@ -820,7 +832,7 @@ void update()
 #endif
                 }
                 else 
-				if(bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)) 
+				if(bit_is_clear(PIN_BTN, PIN_BTN_DOWN))
 				{
                     menu_id++;
                 }
@@ -850,7 +862,7 @@ void update()
     }
     // Save buttom     
     // hardware save buttom support (if no display is used)
-    if(bit_is_clear(PORT_BTN_SAVE, PIN_BTN_SAVE))
+    if(bit_is_clear(PIN_BTN, PIN_BTN_SAVE))
     {
         state = STATE_SAVE;
     }
@@ -869,7 +881,6 @@ void update()
             case STATE_SCAN: // Band Scanner
                 state_last_used = state;
             case STATE_RSSI_SETUP: // RSSI setup
-                // draw selected
                 if(state==STATE_RSSI_SETUP)
                 {
                     // prepare new setup
@@ -900,14 +911,11 @@ void update()
                 force_seek = 1;
             case STATE_MANUAL: // manual mode
                 if (state == STATE_MANUAL)
-                {
                     time_screen_saver = millis();
-                }
                 else 
 				if(state == STATE_SEEK)
-                {
                     time_screen_saver = 0; // dont show screen saver until we found a channel.
-                }
+
                 drawScreen.seekMode(state);
 
                 // return user to their saved channel after bandscan
@@ -990,9 +998,9 @@ void update()
                 voltage_alarm();
                 //delay(100); // timeout delay
             } // wait for next key press
-            while(bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE) && bit_is_set(PORT_BTN_UP, PIN_BTN_UP) && bit_is_set(PORT_BTN_DOWN, PIN_BTN_DOWN));
+            while(bit_is_set(PIN_BTN, PIN_BTN_MODE) && bit_is_set(PIN_BTN, PIN_BTN_UP) && bit_is_set(PIN_BTN, PIN_BTN_DOWN));
 
-            if(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE))
+            if(bit_is_clear(PIN_BTN, PIN_BTN_MODE))
 			{
                 if(editing > -1)
 				{
@@ -1014,7 +1022,7 @@ void update()
                 }
             } 
 			else 
-			if(bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)) 
+			if(bit_is_clear(PIN_BTN, PIN_BTN_DOWN))
 			{
                 switch (editing) 
 				{
@@ -1033,7 +1041,7 @@ void update()
                 }
             }
             else 
-			if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP))
+			if(bit_is_clear(PIN_BTN, PIN_BTN_UP))
 			{
                 switch (editing) 
 				{
@@ -1064,7 +1072,7 @@ void update()
 			{ // wait for button release
                 delay(150);
             }
-            while(editing==-1 && (bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE) || bit_is_clear(PORT_BTN_UP, PIN_BTN_UP) || bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)));
+            while(editing==-1 && (bit_is_clear(PIN_BTN, PIN_BTN_MODE) || bit_is_clear(PIN_BTN, PIN_BTN_UP) || bit_is_clear(PIN_BTN, PIN_BTN_DOWN)));
         }
         while(in_voltage_menu);
     }
@@ -1087,19 +1095,19 @@ void update()
                 read_rssi();
                 drawScreen.updateDiversity(active_receiver, read_rssi(useReceiverA), read_rssi(useReceiverB));
             } // wait for next mode or time out
-            while(bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE) && bit_is_set(PORT_BTN_UP, PIN_BTN_UP) && bit_is_set(PORT_BTN_DOWN, PIN_BTN_DOWN));
+            while(bit_is_set(PIN_BTN, PIN_BTN_MODE) && bit_is_set(PIN_BTN, PIN_BTN_UP) && bit_is_set(PIN_BTN, PIN_BTN_DOWN));
 
-            if(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE)) // Channel UP
+            if(bit_is_clear(PIN_BTN, PIN_BTN_MODE)) // Channel UP
             {
                 in_menu = 0; // exit menu
             }
             else 
-			if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP)) 
+			if(bit_is_clear(PIN_BTN, PIN_BTN_UP))
 			{
                 menu_id--;
             }
             else 
-			if(bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN))
+			if(bit_is_clear(PIN_BTN, PIN_BTN_DOWN))
 			{
                 menu_id++;
             }
@@ -1131,7 +1139,7 @@ void update()
 	    if(state == STATE_MANUAL)
         {
             // handling of keys
-            if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP))        // channel UP
+            if(bit_is_clear(PIN_BTN, PIN_BTN_UP))        // channel UP
             {
                 time_screen_saver = millis();
                 beep(50); // beep & debounce
@@ -1146,7 +1154,7 @@ void update()
                 }
             }
 
-            if(bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)) // channel DOWN
+            if(bit_is_clear(PIN_BTN, PIN_BTN_DOWN)) // channel DOWN
             {
                 time_screen_saver=millis();
                 beep(50); // beep & debounce
@@ -1218,9 +1226,9 @@ void update()
 				// seek was successful
             }
 
-            if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP) || bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)) // restart seek if key pressed
+            if(bit_is_clear(PIN_BTN, PIN_BTN_UP) || bit_is_clear(PIN_BTN, PIN_BTN_DOWN)) // restart seek if key pressed
             {
-                if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP))
+                if(bit_is_clear(PIN_BTN, PIN_BTN_UP))
                     seek_direction = 1;
                 else
                     seek_direction = -1;
@@ -1321,7 +1329,7 @@ void update()
         }
 	    
         // new scan possible by press scan
-        if (bit_is_clear(PORT_BTN_UP, PIN_BTN_UP)) // force new full new scan
+        if (bit_is_clear(PIN_BTN, PIN_BTN_UP)) // force new full new scan
         {
             beep(50); // beep & debounce
             delay(KEY_DEBOUNCE); // debounce
@@ -1349,7 +1357,7 @@ void update()
 
             drawScreen.setupMenu(menu_id, settings_beeps, settings_orderby_channel, call_sign, editing);
             
-	        while(--in_menu_time_out && (bit_is_set(PORT_BTN_MODE, PIN_BTN_MODE) && bit_is_set(PORT_BTN_UP, PIN_BTN_UP) && bit_is_set(PORT_BTN_DOWN, PIN_BTN_DOWN))) // wait for next key press or time out
+	        while(--in_menu_time_out && bit_is_set(PIN_BTN, PIN_BTN_MODE) && bit_is_set(PIN_BTN, PIN_BTN_UP) && bit_is_set(PIN_BTN, PIN_BTN_DOWN)) // wait for next key press or time out
             {
                 delay(100); // timeout delay
             }
@@ -1360,7 +1368,7 @@ void update()
                 break; // Timed out, Don't save...
             }
 
-            if(bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE)) // modeButton
+            if(bit_is_clear(PIN_BTN, PIN_BTN_MODE)) // modeButton
             {
                 // do something about the users selection
                 switch(menu_id) 
@@ -1407,7 +1415,7 @@ void update()
                 }
             }
             else 
-	        if(bit_is_clear(PORT_BTN_UP, PIN_BTN_UP))
+	        if(bit_is_clear(PIN_BTN, PIN_BTN_UP))
             {
                 if(editing == -1) 
                 {
@@ -1427,7 +1435,7 @@ void update()
 
             }
             else 
-	        if(bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN))
+	        if(bit_is_clear(PIN_BTN, PIN_BTN_DOWN))
 	        {
                 if(editing == -1) 
                 {
@@ -1458,7 +1466,7 @@ void update()
 	        {
                 delay(150); // wait for button release
             }
-            while(editing==-1 && (bit_is_clear(PORT_BTN_MODE, PIN_BTN_MODE) || bit_is_clear(PORT_BTN_UP, PIN_BTN_UP) || bit_is_clear(PORT_BTN_DOWN, PIN_BTN_DOWN)));
+            while(editing==-1 && (bit_is_clear(PIN_BTN, PIN_BTN_MODE) || bit_is_clear(PIN_BTN, PIN_BTN_UP) || bit_is_clear(PIN_BTN, PIN_BTN_DOWN)));
 		}
         while(in_menu);
     }
